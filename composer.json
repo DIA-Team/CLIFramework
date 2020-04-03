@@ -23,7 +23,7 @@
     "require-dev": {
         "ext-intl": "*",
         "corneltek/phpunit-testmore": "dev-master",
-        "phpunit/phpunit": "^6"
+        "brianium/paratest": "^4.0"
     },
     "license": "MIT",
     "authors": [
