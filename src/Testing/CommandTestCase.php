@@ -16,7 +16,7 @@ abstract class CommandTestCase extends TestCase
         return $this->app;
     }
 
-    public function setUp()
+    public function setUp() : void
     {
         if ($this->outputBufferingActive) {
             ob_start();
@@ -24,7 +24,7 @@ abstract class CommandTestCase extends TestCase
         $this->app = static::setupApplication();
     }
 
-    public function tearDown()
+    public function tearDown() : void
     {
         $this->app = null;
         if ($this->outputBufferingActive) {

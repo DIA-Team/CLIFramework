@@ -3,7 +3,7 @@ use CLIFramework\ArgInfo;
 use PHPUnit\Framework\TestCase;
 
 
-class ArgInfoTest extends TestCase
+class ArgumentInfoTest extends TestCase
 {
     public function test()
     {

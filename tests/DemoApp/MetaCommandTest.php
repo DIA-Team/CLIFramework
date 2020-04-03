@@ -1,5 +1,7 @@
 <?php
 namespace DemoApp;
+use CLIFramework\Exception\CommandNotFoundException;
+use CLIFramework\Exception\CommandArgumentNotEnoughException;
 use CLIFramework\Testing\CommandTestCase;
 use CLIFramework\ServiceContainer;
 
@@ -56,6 +58,7 @@ ActionKit
      */
     public function testCommandNotFound()
     {
+        $this->expectException(CommandNotFoundException::class);
         $this->assertTrue( $this->runCommand('example/demo --no-interact zzz') );
     }
 
@@ -64,6 +67,7 @@ ActionKit
      */
     public function testArgument()
     {
+        $this->expectException(CommandArgumentNotEnoughException::class);
         $this->assertTrue( $this->runCommand('example/demo commit') );
     }
 

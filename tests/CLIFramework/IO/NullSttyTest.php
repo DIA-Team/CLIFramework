@@ -16,7 +16,7 @@ class NullSttyTest extends \PHPUnit\Framework\TestCase
 {
     private $stty;
 
-    function setUp()
+    function setUp(): void
     {
         $this->stty = new NullStty();
     }

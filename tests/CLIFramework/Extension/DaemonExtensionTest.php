@@ -21,7 +21,7 @@ class DaemonExtensionTest extends TestCase
 
     private $command;
 
-    public function setUp()
+    public function setUp() : void
     {
         $extension = new DaemonExtensionForTest;
         if (!$extension->isAvailable()) {
@@ -40,7 +40,7 @@ class DaemonExtensionTest extends TestCase
         $this->command->executeWrapper(array());
     }
 
-    public function tearDown()
+    public function tearDown() : void
     {
     }
 }
