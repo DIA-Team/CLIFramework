@@ -1,8 +1,34 @@
-# dev-master
+# Changelog
 
-- Chooser component update to support associative arrays properly.
+All notable changes to this project will be documented in this file.
 
-Version 3.0.0
+The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
+and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+
+## [v3.0.4] - 2020-04-03
+
+### Added
+
+- notificaion settings
+- travis: add `allow_failure`
+
+### Fixed
+
+- bug where psr4 autoload generator wasn't putting paths inside array
+- help command by replacing optionSpec property fetch from external
+- meta command tests
+- notification settings
+- test case for phpunit 6
+
+### Refactored
+
+- option parsing and fix subcommand option parsing
+
+### Removed
+
+- `class-template` depdency
+
+## [v3.0.0]
 
 - Added Progress Component.
 
@@ -79,4 +105,3 @@ Version 1.3.1 - 三  3/14 18:10:37 2012
 - Added Chooser component.
 - Added Prompter component.
 - Refactor formatter methods.
-
