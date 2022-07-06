@@ -2,7 +2,7 @@
     "name": "dia-team/cliframework",
     "homepage": "http://github.com/c9s/CLIFramework",
     "description": "Command-line framework for PHP",
-    "version": "3.0.4",
+    "version": "3.0.5",
     "keywords": [
         "command",
         "command-line",
