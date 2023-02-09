@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dd7e0964e65140c1f808b276bd3511dd",
+    "content-hash": "e8caaaca7678f002314c86c53ef6cfd5",
     "packages": [
         {
             "name": "corneltek/codegen",
@@ -4395,7 +4395,6 @@
     "prefer-lowest": false,
     "platform": {
         "php": ">=7.4.0",
-        "ext-intl": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
         "ext-pcntl": "*",
