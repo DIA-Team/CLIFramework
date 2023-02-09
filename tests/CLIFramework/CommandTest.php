@@ -1,18 +1,14 @@
 <?php
+
 namespace tests\CLIFramework;
 
-use CLIFramework\Command;
 use CLIFramework\Application;
+use CLIFramework\Command;
 use PHPUnit\Framework\TestCase;
 
 class CommandTest extends TestCase
 {
     private $command;
-
-    protected function setUp(): void
-    {
-        $this->command = new CommandTestCommand();
-    }
 
     public function testHasApplicationWhenApplicationIsNotSet()
     {
@@ -21,8 +17,13 @@ class CommandTest extends TestCase
 
     public function testHasApplicationWhenApplicationIsSet()
     {
-        $this->command->setApplication(new Application);
+        $this->command->setApplication(new Application());
         $this->assertTrue($this->command->hasApplication());
+    }
+
+    protected function setUp(): void
+    {
+        $this->command = new CommandTestCommand();
     }
 }
 

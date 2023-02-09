@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the {{ }} package.
  *
@@ -8,29 +9,30 @@
  * file that was distributed with this source code.
  *
  */
+
 namespace TestApp\Command;
 
 use CLIFramework\Command;
 
-class ListCommand extends Command 
+class ListCommand extends Command
 {
-
-    public function brief() {
+    public function brief()
+    {
         return 'brief message';
     }
 
-    public function usage() {
+    public function usage()
+    {
         return 'app list [arguments]';
     }
 
-    public function init() {
+    public function init()
+    {
         $this->command('foo');
         $this->command('extra', 'TestApp\Command\ListCommand\ExtraArgumentTestCommand');
     }
 
-    public function execute() {
-
+    public function execute()
+    {
     }
-
 }
-

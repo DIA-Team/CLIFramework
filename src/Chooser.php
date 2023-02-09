@@ -1,4 +1,5 @@
 <?php
+
 namespace CLIFramework;
 
 use CLIFramework\Formatter;
@@ -16,7 +17,7 @@ class Chooser
 
     public function __construct()
     {
-        $this->formatter = new Formatter;
+        $this->formatter = new Formatter();
     }
 
     /**

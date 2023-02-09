@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the {{ }} package.
  *
@@ -8,15 +9,17 @@
  * file that was distributed with this source code.
  *
  */
+
 namespace tests\CLIFramework\IO;
 
 use CLIFramework\IO\EchoWriter;
+use PHPUnit\Framework\TestCase;
 
-class EchoWriterTest extends \PHPUnit\Framework\TestCase 
+class EchoWriterTest extends TestCase
 {
     private $writer;
 
-    function setUp() : void
+    function setUp(): void
     {
         $this->writer = new EchoWriter();
     }

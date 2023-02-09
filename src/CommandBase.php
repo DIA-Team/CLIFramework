@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the CLIFramework package.
  *
@@ -44,9 +45,6 @@ use CLIFramework\Command\HelpCommand;
  */
 abstract class CommandBase implements ArrayAccess, IteratorAggregate, CommandInterface
 {
-
-
-
     /**
      * @var application commands
      *
@@ -93,7 +91,7 @@ abstract class CommandBase implements ArrayAccess, IteratorAggregate, CommandInt
 
         // create an empty option result, please note this result object will
         // be replaced with the parsed option result.
-        $this->options = new OptionResult;
+        $this->options = new OptionResult();
     }
 
 
@@ -162,7 +160,7 @@ abstract class CommandBase implements ArrayAccess, IteratorAggregate, CommandInt
     public function extension($extension)
     {
         if (is_string($extension)) {
-            $extension = new $extension;
+            $extension = new $extension();
         } elseif (! $extension instanceof ExtensionBase) {
             throw new LogicException("Not an extension object or an extension class name.");
         }
@@ -234,8 +232,12 @@ abstract class CommandBase implements ArrayAccess, IteratorAggregate, CommandInt
             $text = $matches[2];
 
             switch ($style) {
-                case 'b': $style = 'bold'; break;
-                case 'u': $style = 'underline'; break;
+                case 'b':
+                    $style = 'bold';
+                    break;
+                case 'u':
+                    $style = 'underline';
+                    break;
             }
 
             if ($formatter->hasStyle($style)) {
@@ -346,7 +348,7 @@ abstract class CommandBase implements ArrayAccess, IteratorAggregate, CommandInt
     public function registerCommand($command, $class = null)
     {
         $trace = debug_backtrace(false, 2);
-        $call = $trace[0]['file'].':'.$trace[0]['line'];
+        $call = $trace[0]['file'] . ':' . $trace[0]['line'];
         trigger_error("'registerCommand' method is deprecated, please use 'addCommand' instead. Called on $call\n");
         return $this->addCommand($command, $class);
     }
@@ -720,7 +722,7 @@ abstract class CommandBase implements ArrayAccess, IteratorAggregate, CommandInt
     {
         // get option parser, init specs from the command.
         if (!$this->optionSpecs) {
-            $this->optionSpecs = new OptionCollection;
+            $this->optionSpecs = new OptionCollection();
             // build options
             $this->options($this->optionSpecs);
         }
@@ -766,7 +768,7 @@ abstract class CommandBase implements ArrayAccess, IteratorAggregate, CommandInt
     {
         if ($this->argInfos === null) {
             // build arg info
-            $args = new ArgInfoList;
+            $args = new ArgInfoList();
             $this->arguments($args);
             if (!empty($args)) {
                 return $this->argInfos = $args;
@@ -781,7 +783,7 @@ abstract class CommandBase implements ArrayAccess, IteratorAggregate, CommandInt
      */
     public function getArgInfoListByReflection()
     {
-        $argInfo = new ArgInfoList;
+        $argInfo = new ArgInfoList();
 
         $ro = new ReflectionObject($this);
         if (!method_exists($this, 'execute')) {
@@ -882,7 +884,7 @@ abstract class CommandBase implements ArrayAccess, IteratorAggregate, CommandInt
      */
     public function ask($prompt, $validAnswers = null)
     {
-        $prompter = new Prompter;
+        $prompter = new Prompter();
         $prompter->setStyle('ask');
         return $prompter->ask($prompt, $validAnswers);
     }
@@ -908,7 +910,7 @@ abstract class CommandBase implements ArrayAccess, IteratorAggregate, CommandInt
      */
     public function choose($prompt, $choices)
     {
-        $chooser = new Chooser;
+        $chooser = new Chooser();
         $chooser->setStyle('choose');
         return $chooser->choose($prompt, $choices);
     }

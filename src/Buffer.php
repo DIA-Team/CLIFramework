@@ -1,4 +1,5 @@
 <?php
+
 namespace CLIFramework;
 
 // TODO: refactoring this to a standalone package.

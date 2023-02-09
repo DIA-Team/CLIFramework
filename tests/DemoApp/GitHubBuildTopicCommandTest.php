@@ -1,18 +1,19 @@
 <?php
-namespace DemoApp;
-use CLIFramework\Testing\CommandTestCase;
-use RecursiveIteratorIterator;
-use RecursiveDirectoryIterator;
 
+namespace DemoApp;
+
+use CLIFramework\Testing\CommandTestCase;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 
 /**
  * @group github-topic
  */
 class GitHubBuildTopicCommandTest extends CommandTestCase
 {
-
-    public static function setupApplication() {
-        return new \DemoApp\Application;
+    public static function setupApplication()
+    {
+        return new Application();
     }
 
     public function testBuildGitHubTopics()
@@ -26,21 +27,19 @@ class GitHubBuildTopicCommandTest extends CommandTestCase
         $this->cleanUp($outputDir);
     }
 
-    public function cleanUp($path) {
+    public function cleanUp($path)
+    {
         if (!file_exists($path)) {
             return;
         }
         $directoryIterator = new RecursiveDirectoryIterator($path, RecursiveDirectoryIterator::SKIP_DOTS);
-        $iterator = new RecursiveIteratorIterator($directoryIterator, RecursiveIteratorIterator::CHILD_FIRST);
-        foreach($iterator as $file) {
+        $iterator          = new RecursiveIteratorIterator($directoryIterator, RecursiveIteratorIterator::CHILD_FIRST);
+        foreach ($iterator as $file) {
             if (is_file($file)) {
                 unlink($file);
-            } else if (is_dir($file)) {
+            } elseif (is_dir($file)) {
                 rmdir($file);
             }
         }
     }
 }
-
-
-

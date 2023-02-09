@@ -1,4 +1,5 @@
 <?php
+
 namespace CLIFramework\Completion;
 
 class Utils

@@ -1,4 +1,5 @@
 <?php
+
 if (isset($argv[1])) {
     $file = $argv[1];
 } else {

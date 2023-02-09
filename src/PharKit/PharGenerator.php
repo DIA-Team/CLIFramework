@@ -1,9 +1,9 @@
 <?php
+
 namespace CLIFramework\PharKit;
 
 use Phar;
 use CLIFramework\Logger;
-
 use CodeGen\Block;
 use CodeGen\Expr\NewObjectExpr;
 use CodeGen\Statement\UseStatement;
@@ -67,14 +67,14 @@ class PharGenerator
             $compressType = null;
         } elseif ($type = $this->options->compress) {
             switch ($type) {
-            case 'gz':
-                $compressType = Phar::GZ;
-                break;
-            case 'bz2':
-                $compressType = Phar::BZ2;
-                break;
-            default:
-                throw new Exception("Phar compression: $type is not supported, valid values are gz, bz2");
+                case 'gz':
+                    $compressType = Phar::GZ;
+                    break;
+                case 'bz2':
+                    $compressType = Phar::BZ2;
+                    break;
+                default:
+                    throw new Exception("Phar compression: $type is not supported, valid values are gz, bz2");
                 break;
             }
         }

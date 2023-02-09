@@ -1,7 +1,8 @@
 <?php
+
 require __DIR__ . '/../../../bootstrap.php';
 
-$stty = new CLIFramework\IO\NullStty();
+$stty  = new CLIFramework\IO\NullStty();
 $input = new CLIFramework\IO\StandardConsole($stty);
-$line = $input->readPassword('');
+$line  = $input->readPassword('');
 echo $line;

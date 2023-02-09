@@ -1,20 +1,25 @@
 <?php
+
 namespace DemoApp\Topic;
+
 use CLIFramework\Topic\BaseTopic;
 
-class BasicTopic extends BaseTopic {
-
-    public function getTitle() {
+class BasicTopic extends BaseTopic
+{
+    public function getTitle()
+    {
         return 'Basic Tutorial';
     }
 
-    public function getUrl() {
+    public function getUrl()
+    {
         return 'https://github.com/c9s/CLIFramework';
     }
 
-    public function getContent() {
-        return 
-'        alternate object database
+    public function getContent()
+    {
+        return
+          '        alternate object database
             Via the alternates mechanism, a repository can inherit part of its object database from another
             object database, which is called an "alternate".
 
@@ -37,4 +42,3 @@ class BasicTopic extends BaseTopic {
             "checked out" branch), and HEAD points to that branch.';
     }
 }
-

@@ -34,14 +34,14 @@ class HelpCommand extends Command implements CommandInterface
 
     public function displayTopic($topic)
     {
-        $this->logger->write($this->formatter->format('TOPIC', 'strong_white')."\n");
-        $this->logger->write("\t".$topic->getTitle()."\n\n");
-        $this->logger->write($this->formatter->format('DESCRIPTION', 'strong_white')."\n");
-        $this->logger->write($topic->getContent()."\n\n");
+        $this->logger->write($this->formatter->format('TOPIC', 'strong_white') . "\n");
+        $this->logger->write("\t" . $topic->getTitle() . "\n\n");
+        $this->logger->write($this->formatter->format('DESCRIPTION', 'strong_white') . "\n");
+        $this->logger->write($topic->getContent() . "\n\n");
 
         if ($footer = $topic->getFooter()) {
-            $this->logger->write($this->formatter->format('MORE', 'strong_white')."\n");
-            $this->logger->write($footer."\n");
+            $this->logger->write($this->formatter->format('MORE', 'strong_white') . "\n");
+            $this->logger->write($footer . "\n");
         }
     }
 
@@ -67,7 +67,8 @@ class HelpCommand extends Command implements CommandInterface
             $cmd = new $class();
             $brief = $cmd->brief();
             $this->logger->writeln(str_repeat(' ', $indent)
-                .sprintf('%'.($maxWidth + $indent).'s    %s',
+                . sprintf(
+                    '%' . ($maxWidth + $indent) . 's    %s',
                     $name,
                     $brief
                 ));
@@ -113,36 +114,36 @@ class HelpCommand extends Command implements CommandInterface
                 $cmd = $cmd->getCommand($commandNames[$i]);
             }
             if (!$cmd) {
-                throw new Exception('Command entry '.implode(' ', $commandNames).' not found');
+                throw new Exception('Command entry ' . implode(' ', $commandNames) . ' not found');
             }
 
             $usage = $cmd->usage();
 
             if ($brief = $cmd->brief()) {
-                $logger->write($formatter->format('NAME', 'strong_white')."\n");
-                $logger->write("\t".$formatter->format($cmd->getName(), 'strong_white').' - '.$brief."\n\n");
+                $logger->write($formatter->format('NAME', 'strong_white') . "\n");
+                $logger->write("\t" . $formatter->format($cmd->getName(), 'strong_white') . ' - ' . $brief . "\n\n");
             }
 
             if ($aliases = $cmd->aliases()) {
-                $logger->write($formatter->format('ALIASES', 'strong_white')."\n");
-                $logger->write("\t".$formatter->format(implode(', ', $aliases), 'strong_white')."\n\n");
+                $logger->write($formatter->format('ALIASES', 'strong_white') . "\n");
+                $logger->write("\t" . $formatter->format(implode(', ', $aliases), 'strong_white') . "\n\n");
             }
 
             if ($usage = trim($cmd->usage())) {
-                $logger->write($formatter->format('USAGE', 'strong_white')."\n");
-                $logger->write("\t".$usage);
+                $logger->write($formatter->format('USAGE', 'strong_white') . "\n");
+                $logger->write("\t" . $usage);
                 $logger->write("\n\n");
             }
 
-            $logger->write($formatter->format('SYNOPSIS', 'strong_white')."\n");
+            $logger->write($formatter->format('SYNOPSIS', 'strong_white') . "\n");
             $prototypes = $cmd->getAllCommandPrototype();
             foreach ($prototypes as $prototype) {
-                $logger->writeln("\t".' '.$prototype);
+                $logger->writeln("\t" . ' ' . $prototype);
             }
             $logger->write("\n");
 
             if ($optionLines = $printer->render($cmd->getOptionCollection())) {
-                $logger->write($formatter->format('OPTIONS', 'strong_white')."\n");
+                $logger->write($formatter->format('OPTIONS', 'strong_white') . "\n");
                 $logger->write($optionLines);
                 $logger->write("\n");
             }
@@ -150,16 +151,16 @@ class HelpCommand extends Command implements CommandInterface
             $logger->write($cmd->getFormattedHelpText());
         } else {
             $cmd = $this->parent;
-            $logger->write($formatter->format(ucfirst($cmd->brief()), 'strong_white')."\n\n");
+            $logger->write($formatter->format(ucfirst($cmd->brief()), 'strong_white') . "\n\n");
 
             if ($usage = trim($cmd->usage())) {
-                $logger->write($formatter->format('USAGE', 'strong_white')."\n");
+                $logger->write($formatter->format('USAGE', 'strong_white') . "\n");
                 $logger->write($usage);
                 $logger->write("\n\n");
             }
 
-            $logger->write($formatter->format('SYNOPSIS', 'strong_white')."\n");
-            $logger->write("\t".$progname);
+            $logger->write($formatter->format('SYNOPSIS', 'strong_white') . "\n");
+            $logger->write("\t" . $progname);
             if (!empty($cmd->getOptionCollection()->options)) {
                 $logger->write(' [options]');
             }
@@ -169,14 +170,14 @@ class HelpCommand extends Command implements CommandInterface
             } else {
                 $argInfos = $cmd->getArgInfoList();
                 foreach ($argInfos as $argInfo) {
-                    $logger->write(' <'.$argInfo->name.'>');
+                    $logger->write(' <' . $argInfo->name . '>');
                 }
             }
 
             $logger->write("\n\n");
 
             // print application options
-            $logger->write($formatter->format('OPTIONS', 'strong_white')."\n");
+            $logger->write($formatter->format('OPTIONS', 'strong_white') . "\n");
             $logger->write($printer->render($cmd->getOptionCollection()));
             $logger->write("\n\n");
 
@@ -200,7 +201,7 @@ class HelpCommand extends Command implements CommandInterface
 
             // show "General commands" title if there are more than one groups
             if (count($ret['groups']) > 1 || $this->options->dev) {
-                $this->logger->writeln('  '.$formatter->format('General Commands', 'strong_white'));
+                $this->logger->writeln('  ' . $formatter->format('General Commands', 'strong_white'));
             }
             $this->layoutCommands($ret['commands']);
 
@@ -208,7 +209,7 @@ class HelpCommand extends Command implements CommandInterface
                 if (!$this->options->dev && $group->getId() == 'dev') {
                     continue;
                 }
-                $this->logger->writeln('  '.$formatter->format($group->getName(), 'strong_white'));
+                $this->logger->writeln('  ' . $formatter->format($group->getName(), 'strong_white'));
                 $this->layoutCommands($group->getCommands());
             }
 
@@ -218,16 +219,19 @@ class HelpCommand extends Command implements CommandInterface
                 $logger->write($formatter->format("TOPICS\n", 'strong_white'));
                 $maxWidth = $this->calculateColumnWidth(array_keys($app->topics), 8);
                 foreach ($app->topics as $topicId => $topic) {
-                    printf('%'.($maxWidth + 8)."s    %s\n", $topicId, $topic->getTitle());
+                    printf('%' . ($maxWidth + 8) . "s    %s\n", $topicId, $topic->getTitle());
                 }
                 $logger->newline();
             }
 
             $logger->write($formatter->format("HELP\n", 'strong_white'));
             $this->logger->writeln(wordwrap(
-                "\t'$progname help' lists available subcommands and some".
-                " topics. See '$progname help <command>' or '$progname help <topic>'".
-                " to read about a specific subcommand or $progname.", 70, "\n\t"));
+                "\t'$progname help' lists available subcommands and some" .
+                " topics. See '$progname help <command>' or '$progname help <topic>'" .
+                " to read about a specific subcommand or $progname.",
+                70,
+                "\n\t"
+            ));
         }
 
         if ($app->showAppSignature) {

@@ -51,7 +51,7 @@ class ArgumentEditor
 
     public function replaceRegExp($regexp, $newarg)
     {
-        $regexp = '/'.preg_quote($regexp, '/').'/';
+        $regexp = '/' . preg_quote($regexp, '/') . '/';
         $this->args = preg_replace($regexp, $newarg, $this->args);
     }
 
@@ -62,7 +62,7 @@ class ArgumentEditor
      */
     public function removeRegExp($regexp)
     {
-        $regexp = '/'.preg_quote($regexp, '/').'/';
+        $regexp = '/' . preg_quote($regexp, '/') . '/';
         $this->args = preg_grep($regexp, $this->args, PREG_GREP_INVERT);
     }
 

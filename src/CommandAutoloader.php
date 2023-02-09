@@ -1,4 +1,5 @@
 <?php
+
 namespace CLIFramework;
 
 /**
@@ -22,7 +23,7 @@ class CommandAutoloader
     {
         $this->parent = $parent;
     }
-    
+
     /**
      * Add all commands in a directory to parent command
      *
@@ -38,7 +39,7 @@ class CommandAutoloader
         $commands = $this->scanCommandsInPath($path);
         $this->addCommandsForParent($commands);
     }
-    
+
     private function getCurrentCommandDirectory()
     {
         $reflector = new \ReflectionClass(get_class($this->parent));
@@ -50,12 +51,12 @@ class CommandAutoloader
          * If parent is another command named FooCommand, sub-commands must
          *     within App/Command/FooCommand/ directory.
          */
-        $commandDirectoryBase= $this->parent->isApplication()
+        $commandDirectoryBase = $this->parent->isApplication()
             ? 'Command'
             : $reflector->getShortName();
         return $classDir . DIRECTORY_SEPARATOR . $commandDirectoryBase;
     }
-    
+
     private function scanCommandsInPath($path)
     {
         if (!is_dir($path)) {

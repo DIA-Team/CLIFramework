@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<ruleset name="DIA Mess Detector Ruleset"
+         xmlns="http://pmd.sf.net/ruleset/1.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0
+                     http://pmd.sf.net/ruleset_xml_schema.xsd"
+         xsi:noNamespaceSchemaLocation="
+                     http://pmd.sf.net/ruleset_xml_schema.xsd">
+    <description>
+        Our custom Mess Detector Ruleset.
+    </description>
+
+    <rule ref="rulesets/cleancode.xml">
+        <exclude name="StaticAccess" />
+    </rule>
+    <rule ref="rulesets/codesize.xml">
+        <exclude name="TooManyPublicMethods"/>
+    </rule>
+    <rule ref="rulesets/codesize.xml/TooManyPublicMethods">
+        <properties>
+            <property name="ignorepattern" value="(^(set|get|test))i" />
+        </properties>
+    </rule>
+    <rule ref="rulesets/controversial.xml">
+        <exclude name="Superglobals"/>
+    </rule>
+    <rule ref="rulesets/design.xml"/>
+    <rule ref="rulesets/naming.xml">
+        <exclude name="ShortVariable"/>
+        <exclude name="ShortMethodName"/>
+    </rule>
+    <rule ref="rulesets/naming.xml/ShortVariable">
+        <properties>
+            <property name="exceptions" value="db,i,j,fh" />
+        </properties>
+    </rule>
+    <rule ref="rulesets/naming.xml/ShortMethodName">
+        <properties>
+            <property name="exceptions" value="up" />
+        </properties>
+    </rule>
+    <rule ref="rulesets/unusedcode.xml" />
+</ruleset>

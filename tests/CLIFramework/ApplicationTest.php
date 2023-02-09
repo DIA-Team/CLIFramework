@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the {{ }} package.
  *
@@ -8,17 +9,19 @@
  * file that was distributed with this source code.
  *
  */
+
 namespace tests\CLIFramework;
-use TestApp\Application;
+
 use PHPUnit\Framework\TestCase;
+use TestApp\Application;
 
 class ApplicationTest extends TestCase
 {
     public function testGlobalVars()
     {
-        $app = new Application;
-        $argv = explode(' ','app -v -d list foo arg1 arg2 arg3');
-        $ret = $app->run($argv);
+        $app  = new Application();
+        $argv = explode(' ', 'app -v -d list foo arg1 arg2 arg3');
+        $ret  = $app->run($argv);
         $this->assertTrue($ret);
 
         $logger = $app->getLogger();
@@ -26,33 +29,32 @@ class ApplicationTest extends TestCase
         global $_prepare;
         global $_execute;
         global $_finish;
-        $this->assertNotNull( $_prepare );
-        $this->assertNotNull( $_execute );
-        $this->assertNotNull( $_finish );
+        $this->assertNotNull($_prepare);
+        $this->assertNotNull($_execute);
+        $this->assertNotNull($_finish);
     }
 
     public function testPostOptionParsing()
     {
-        $app = new Application;
-        $argv = explode(' ','app -v -d test1 ARG1 ARG2 --as AS');
-        $ret = $app->run($argv);
+        $app  = new Application();
+        $argv = explode(' ', 'app -v -d test1 ARG1 ARG2 --as AS');
+        $ret  = $app->run($argv);
         $this->assertTrue($ret);
     }
 
     public function testOptionParsing()
     {
-        $app = new Application;
-        $argv = explode(' ','app -v -d test1 --as AS ARG1 ARG2');
-        $ret = $app->run($argv);
+        $app  = new Application();
+        $argv = explode(' ', 'app -v -d test1 --as AS ARG1 ARG2');
+        $ret  = $app->run($argv);
         $this->assertTrue($ret);
     }
 
     public function testExtraArguments()
     {
-        $app = new Application;
-        $argv = explode(' ','app -v -d list extra --as AS ARG1 ARG2');
-        $ret = $app->run($argv);
-        $this->assertTrue( $ret );
+        $app  = new Application();
+        $argv = explode(' ', 'app -v -d list extra --as AS ARG1 ARG2');
+        $ret  = $app->run($argv);
+        $this->assertTrue($ret);
     }
-
 }

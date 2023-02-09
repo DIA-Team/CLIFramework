@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the CLIFramework package.
  *
@@ -22,7 +23,6 @@ namespace CLIFramework;
  */
 class Formatter
 {
-
     // Refactor style builder out.
     protected $styles = array(
         'dim'          => array('dim' => 1),
@@ -134,7 +134,7 @@ class Formatter
             }
         }
 
-        return "\033[".implode(';', $codes).'m';
+        return "\033[" . implode(';', $codes) . 'm';
     }
 
     public function getClearMark()

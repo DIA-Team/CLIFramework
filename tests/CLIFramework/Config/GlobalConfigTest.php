@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the {{ }} package.
  *
@@ -8,18 +9,20 @@
  * file that was distributed with this source code.
  *
  */
+
 namespace tests\CLIFramework\Config;
 
 use CLIFramework\Config\GlobalConfig;
+use PHPUnit\Framework\TestCase;
 
-class GlobalConfigTest extends \PHPUnit\Framework\TestCase 
+class GlobalConfigTest extends TestCase
 {
     /**
      * @test
      */
     public function testDefaultValues()
     {
-        $config = new GlobalConfig(array());
+        $config = new GlobalConfig([]);
         $this->assertFalse($config->isVerbose());
         $this->assertFalse($config->isDebug());
     }
@@ -56,8 +59,8 @@ class GlobalConfigTest extends \PHPUnit\Framework\TestCase
 
     public function provideSampleConfig()
     {
-        return array(
-            array(parse_ini_file(__DIR__ . '/../../data/sample.ini', true))
-        );
+        return [
+          [parse_ini_file(__DIR__ . '/../../data/sample.ini', true)]
+        ];
     }
 }

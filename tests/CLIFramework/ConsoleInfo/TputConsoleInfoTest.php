@@ -1,7 +1,7 @@
 <?php
-use PHPUnit\Framework\TestCase;
 
 use CLIFramework\ConsoleInfo\TputConsoleInfo;
+use PHPUnit\Framework\TestCase;
 
 class TputConsoleInfoTest extends TestCase
 {
@@ -10,9 +10,8 @@ class TputConsoleInfoTest extends TestCase
         if (!TputConsoleInfo::hasSupport()) {
             return $this->markTestSkipped('tput is not supported.');
         }
-        $info = new TputConsoleInfo;
+        $info = new TputConsoleInfo();
         $this->assertNotNull($info->getColumns());
         $this->assertNotNull($info->getRows());
     }
 }
-

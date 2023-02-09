@@ -1,9 +1,11 @@
 <?php
+
 namespace DemoApp;
 
-class Application extends \CLIFramework\Application {
-
+class Application extends \CLIFramework\Application
+{
     const NAME = 'demo';
+
     const VERSION = '1.0.0';
 
     public function init()
@@ -16,5 +18,3 @@ class Application extends \CLIFramework\Application {
         $this->topic('basic');
     }
 }
-
-

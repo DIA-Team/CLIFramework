@@ -1,4 +1,5 @@
 <?php
+
 namespace CLIFramework\Component\Progress;
 
 use Exception;

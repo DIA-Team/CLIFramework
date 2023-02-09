@@ -26,7 +26,7 @@ class StreamWriter implements Writer
 
     public function writeln($text)
     {
-        fwrite($this->stream, $text."\n");
+        fwrite($this->stream, $text . "\n");
     }
 
     public function writef($format)

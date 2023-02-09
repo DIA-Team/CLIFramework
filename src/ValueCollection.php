@@ -1,4 +1,5 @@
 <?php
+
 namespace CLIFramework;
 
 use IteratorAggregate;
@@ -33,7 +34,9 @@ class ValueCollection implements IteratorAggregate
                 $this->groups[$groupId] = $values;
             } else {
                 $this->groups[ $groupId ] = array_merge(
-                    $this->groups[ $groupId ], $values);
+                    $this->groups[ $groupId ],
+                    $values
+                );
             }
         } else {
             $this->groups[ $groupId ][] = $values;

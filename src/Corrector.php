@@ -1,4 +1,5 @@
 <?php
+
 namespace CLIFramework;
 
 /**
@@ -64,7 +65,7 @@ class Corrector
 
     private function askForGuess($guess)
     {
-        $prompter = new Prompter;
+        $prompter = new Prompter();
         $answer = $prompter->ask("Did you mean '$guess'?", array('Y','n'), 'Y');
         return !$answer || strtolower($answer) == 'y';
     }

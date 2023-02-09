@@ -1,4 +1,5 @@
 <?php
+
 namespace CLIFramework\Component\Table;
 
 use CLIFramework\Component\Table\CellAttribute;

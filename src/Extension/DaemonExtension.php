@@ -1,4 +1,5 @@
 <?php
+
 namespace CLIFramework\Extension;
 
 use CLIFramework\ServiceContainer;
@@ -115,27 +116,27 @@ class DaemonExtension extends CommandExtension
             // context, no child process will be created, and a PHP error is
             // raised.
             switch (pcntl_fork()) {
-            case -1:
-                throw new ExtensionException("pcntl_fork() failed");
+                case -1:
+                    throw new ExtensionException("pcntl_fork() failed");
 
             // child process
-            case 0:
-                break;
+                case 0:
+                    break;
 
             // exit parent process
-            default:
-                if (!fclose(STDIN)) {
-                    throw new ExtensionException("fclose(STDIN) failed");
-                }
+                default:
+                    if (!fclose(STDIN)) {
+                        throw new ExtensionException("fclose(STDIN) failed");
+                    }
 
-                if (!fclose(STDOUT)) {
-                    throw new ExtensionException("fclose(STDOUT) failed");
-                }
+                    if (!fclose(STDOUT)) {
+                        throw new ExtensionException("fclose(STDOUT) failed");
+                    }
 
-                if (!fclose(STDERR)) {
-                    throw new ExtensionException("fclose(STDERR) failed");
-                }
-                exit(0);
+                    if (!fclose(STDERR)) {
+                        throw new ExtensionException("fclose(STDERR) failed");
+                    }
+                    exit(0);
             }
         }
 

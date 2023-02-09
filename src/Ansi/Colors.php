@@ -74,7 +74,7 @@ class Colors
         if (!isset(self::$attributes[$attribute])) {
             throw new InvalidArgumentException("Undefined attribute $attribute");
         }
-        $str = "\033[".self::$attributes[$attribute].'m';
+        $str = "\033[" . self::$attributes[$attribute] . 'm';
         $str .= $text;
         $str = "\033[0m";
 
@@ -88,15 +88,15 @@ class Colors
 
         // Check if given foreground color found
         if ($fg && isset(self::$foregroundColors[$fg])) {
-            $coloredString .= "\033[".self::$foregroundColors[$fg].'m';
+            $coloredString .= "\033[" . self::$foregroundColors[$fg] . 'm';
         }
         // Check if given background color found
         if ($bg && isset(self::$backgroundColors[$bg])) {
-            $coloredString .= "\033[".self::$backgroundColors[$bg].'m';
+            $coloredString .= "\033[" . self::$backgroundColors[$bg] . 'm';
         }
 
         if ($attribute) {
-            $coloredString .= "\033[".self::$attributes[$attribute].'m';
+            $coloredString .= "\033[" . self::$attributes[$attribute] . 'm';
         }
 
         // Add string and end coloring

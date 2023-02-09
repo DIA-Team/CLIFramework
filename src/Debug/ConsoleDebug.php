@@ -1,4 +1,5 @@
 <?php
+
 namespace CLIFramework\Debug;
 
 use CLIFramework\Component\Table\Table;
@@ -17,7 +18,7 @@ class ConsoleDebug
 {
     public static function dumpException(Exception $e)
     {
-        $indicator = new LineIndicator;
+        $indicator = new LineIndicator();
         $output = [];
         $output[] = '[' . get_class($e) . '] was thrown with "' . $e->getMessage() . '".';
         $output[] = $indicator->indicateFile($e->getFile(), $e->getLine());
@@ -41,7 +42,7 @@ class ConsoleDebug
 
     public static function dumpRows(array $array, array $options = array())
     {
-        $table = new Table;
+        $table = new Table();
 
         $keys = null;
         if (isset($options['keys'])) {

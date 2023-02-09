@@ -1,4 +1,5 @@
 <?php
+
 namespace CLIFramework;
 
 use CLIFramework\ValueCollection;
@@ -120,12 +121,12 @@ class ArgInfo
     {
         if ($this->isa) {
             switch ($this->isa) {
-            case "number":
-                return is_numeric($value);
-            case "boolean":
-                return is_bool($value);
-            case "string":
-                return is_string($value);
+                case "number":
+                    return is_numeric($value);
+                case "boolean":
+                    return is_bool($value);
+                case "string":
+                    return is_string($value);
             }
         }
         $validValues = $this->getValidValues();

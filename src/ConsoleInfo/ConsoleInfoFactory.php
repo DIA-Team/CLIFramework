@@ -1,4 +1,5 @@
 <?php
+
 namespace CLIFramework\ConsoleInfo;
 
 use CLIFramework\ConsoleInfo\EnvConsoleInfo;
@@ -9,9 +10,9 @@ class ConsoleInfoFactory
     public static function create()
     {
         if (EnvConsoleInfo::hasSupport()) {
-            return new EnvConsoleInfo;
+            return new EnvConsoleInfo();
         } elseif (TputConsoleInfo::hasSupport()) {
-            return new TputConsoleInfo;
+            return new TputConsoleInfo();
         }
     }
 }

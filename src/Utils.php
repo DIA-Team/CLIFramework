@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the CLIFramework package.
  *
@@ -14,7 +15,6 @@ use ReflectionClass;
 
 class Utils
 {
-
     /**
      * translate command name to class name
      *
@@ -40,7 +40,8 @@ class Utils
             return str_replace(
                 rtrim(realpath($baseDir), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR,
                 '',
-                $path);
+                $path
+            );
         }
         return $path;
     }

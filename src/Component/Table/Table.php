@@ -1,8 +1,8 @@
 <?php
+
 namespace CLIFramework\Component\Table;
 
 use InvalidArgumentException;
-
 use CLIFramework\Component\Table\TableStyle;
 use CLIFramework\Component\Table\MarkdownTableStyle;
 use CLIFramework\Component\Table\CellAttribute;
@@ -33,9 +33,6 @@ class TableSeparator implements Separator
  */
 class Table
 {
-
-
-
     /**
      * @var string[] the rows are expanded by lines
      */
@@ -86,8 +83,8 @@ class Table
 
     public function __construct()
     {
-        $this->style = new TableStyle;
-        $this->defaultCellAttribute = new CellAttribute;
+        $this->style = new TableStyle();
+        $this->defaultCellAttribute = new CellAttribute();
     }
 
     public function setHeaders(array $headers)
@@ -137,7 +134,7 @@ class Table
 
         $columns = array(count($this->headers));
         foreach ($this->rows as $row) {
-            $columns[] = count($row);
+            $columns[] = count((array)$row);
         }
         return $this->numberOfColumns = max($columns);
     }
@@ -235,7 +232,7 @@ class Table
     {
         $out = $this->style->verticalBorderChar;
         $columnNumber = $this->getNumberOfColumns();
-        for ($c = 0 ; $c < $columnNumber ; $c++) {
+        for ($c = 0; $c < $columnNumber; $c++) {
             if (isset($row[$c])) {
                 $cell = $row[$c];
             } else {
@@ -269,7 +266,7 @@ class Table
     {
         $columnNumber = $this->getNumberOfColumns();
         $out = $this->style->rowSeparatorLeftmostCrossChar;
-        for ($c = 0 ; $c < $columnNumber ; $c++) {
+        for ($c = 0; $c < $columnNumber; $c++) {
             $columnWidth = $this->getColumnWidth($c);
             $out .= str_repeat($this->style->rowSeparatorBorderChar, $columnWidth + $this->style->cellPadding * 2);
 
@@ -292,7 +289,7 @@ class Table
 
         $out .= $this->style->verticalBorderChar;
         $columnNumber = $this->getNumberOfColumns();
-        for ($c = 0 ; $c < $columnNumber ; $c++) {
+        for ($c = 0; $c < $columnNumber; $c++) {
             if (isset($this->headers[$c])) {
                 $cell = $this->headers[$c];
             } else {
@@ -311,7 +308,7 @@ class Table
     {
         $columnNumber = $this->getNumberOfColumns();
         $width = 0;
-        for ($c = 0 ; $c < $columnNumber ; $c++) {
+        for ($c = 0; $c < $columnNumber; $c++) {
             $width += $this->getColumnWidth($c) + $this->style->cellPadding * 2 + 1;
         }
         return $width - 1;
@@ -362,7 +359,7 @@ class Table
 
         $out .= $this->style->verticalBorderChar;
         $columnNumber = $this->getNumberOfColumns();
-        for ($c = 0 ; $c < $columnNumber ; $c++) {
+        for ($c = 0; $c < $columnNumber; $c++) {
             if (isset($this->footer[$c])) {
                 $cell = $this->footer[$c];
             } else {

@@ -1,4 +1,5 @@
 <?php
+
 namespace CLIFramework\Testing;
 
 class Parser

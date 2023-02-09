@@ -11,7 +11,7 @@ class EchoWriter implements Writer
 
     public function writeln($text)
     {
-        echo $text."\n";
+        echo $text . "\n";
     }
 
     public function writef($format)

@@ -119,7 +119,7 @@ class ArchiveCommand extends Command
         if (!file_exists($workingDir)) {
             throw new Exception("working directory '$workingDir' doesn't exist.");
         }
-        $this->logger->debug('Working directory: '.$workingDir->getPathname());
+        $this->logger->debug('Working directory: ' . $workingDir->getPathname());
 
         $vendorDirName = $this->options->vendor ?: 'vendor';
 
@@ -168,7 +168,7 @@ class ArchiveCommand extends Command
         );
          */
         foreach ($classPaths as $classPath) {
-            $this->logger->debug('Adding require statment for class loader: '.basename($classPath));
+            $this->logger->debug('Adding require statment for class loader: ' . basename($classPath));
             $stubs[] = new RequireStatement(new PharURI($pharFile, basename($classPath)));
         }
 
@@ -177,9 +177,9 @@ class ArchiveCommand extends Command
             $autoloadGenerator = new ComposerAutoloadGenerator($this->logger);
             $autoloadGenerator->setVendorDir('vendor');
             $autoloadGenerator->setWorkingDir($workingDir->getPathname());
-            $autoloadGenerator->scanComposerJsonFiles($workingDir.DIRECTORY_SEPARATOR.$vendorDirName);
+            $autoloadGenerator->scanComposerJsonFiles($workingDir . DIRECTORY_SEPARATOR . $vendorDirName);
 
-            $autoloads = $autoloadGenerator->traceAutoloadsWithComposerJson($composerConfigFile, $workingDir.DIRECTORY_SEPARATOR.$vendorDirName, true);
+            $autoloads = $autoloadGenerator->traceAutoloadsWithComposerJson($composerConfigFile, $workingDir . DIRECTORY_SEPARATOR . $vendorDirName, true);
             foreach ($autoloads as $packageName => $config) {
                 if (!isset($config['autoload'])) {
                     continue;
@@ -188,14 +188,14 @@ class ArchiveCommand extends Command
                 $autoload = $config['autoload'];
 
                 if (!isset($config['root'])) {
-                    $autoload = $autoloadGenerator->prependAutoloadPathPrefix($autoload, $vendorDirName.DIRECTORY_SEPARATOR.$packageName.DIRECTORY_SEPARATOR);
+                    $autoload = $autoloadGenerator->prependAutoloadPathPrefix($autoload, $vendorDirName . DIRECTORY_SEPARATOR . $packageName . DIRECTORY_SEPARATOR);
                 }
 
                 foreach ($autoload as $type => $map) {
                     foreach ($map as $mapPaths) {
                         $paths = (array) $mapPaths;
                         foreach ($paths as $path) {
-                            $absolutePath = $workingDir.DIRECTORY_SEPARATOR.$path;
+                            $absolutePath = $workingDir . DIRECTORY_SEPARATOR . $path;
 
                             if (is_dir($absolutePath)) {
                                 $this->logger->debug("Add files from directory $absolutePath under $workingDir");
@@ -209,7 +209,7 @@ class ArchiveCommand extends Command
                                     if (preg_match('/(\.(?:git|svn|hg)|Tests|Test\.php)/', $pathName)) {
                                         continue;
                                     }
-                                    $localPath = str_replace($workingDir.DIRECTORY_SEPARATOR, '', $pathName);
+                                    $localPath = str_replace($workingDir . DIRECTORY_SEPARATOR, '', $pathName);
                                     $this->logger->debug("Adding $localPath");
                                     $phar->addFile($pathName, $localPath);
                                 }

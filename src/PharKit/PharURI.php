@@ -1,4 +1,5 @@
 <?php
+
 namespace CLIFramework\PharKit;
 
 use CodeGen\Renderable;

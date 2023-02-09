@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the {{ }} package.
  *
@@ -8,15 +9,16 @@
  * file that was distributed with this source code.
  *
  */
+
 namespace TestApp;
+
 use CLIFramework\Application as CLIApplication;
 
-class Application extends CLIApplication 
+class Application extends CLIApplication
 {
-
     public function options($getopt)
     {
-        $getopt->add('c|color','Color message');
+        $getopt->add('c|color', 'Color message');
         parent::options($getopt);
     }
 
@@ -25,11 +27,8 @@ class Application extends CLIApplication
         parent::init();
         // $this->addCommand('list');
         // $this->addCommand('test1');
-        $this->CommandGroup('Daily Basic', array('list', 'test1'));
+        $this->CommandGroup('Daily Basic', ['list', 'test1']);
         $this->topic('list');
-        $this->topics(array('setup','install'));
+        $this->topics(['setup', 'install']);
     }
-
-
-
 }

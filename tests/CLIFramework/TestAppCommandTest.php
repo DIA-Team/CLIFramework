@@ -1,13 +1,13 @@
 <?php
-use CLIFramework\ArgInfo;
-use TestApp\Application;
+
 use PHPUnit\Framework\TestCase;
+use TestApp\Application;
 
 class TestAppCommandTest extends TestCase
 {
     public function testSimpleCommand()
     {
-        $command = new TestApp\Command\SimpleCommand(new Application);
+        $command = new TestApp\Command\SimpleCommand(new Application());
         $command->init();
 
         $argInfos = $command->getArgInfoList();
@@ -16,17 +16,17 @@ class TestAppCommandTest extends TestCase
         $this->assertEquals('var', $argInfos[0]->name);
     }
 
-    public function testArginfoCommand() {
-        $cmd = new TestApp\Command\ArginfoCommand(new Application);
+    public function testArginfoCommand()
+    {
+        $cmd = new TestApp\Command\ArginfoCommand(new Application());
         $cmd->init();
 
         $argInfos = $cmd->getArgInfoList();
         $this->assertNotEmpty($argInfos);
         $this->assertCount(3, $argInfos);
 
-        foreach( $argInfos as $arginfo ) {
-            $this->assertInstanceOf('CLIFramework\ArgInfo',  $arginfo);
+        foreach ($argInfos as $arginfo) {
+            $this->assertInstanceOf('CLIFramework\ArgInfo', $arginfo);
         }
     }
 }
-

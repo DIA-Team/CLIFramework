@@ -1,7 +1,7 @@
 <?php
+
 use CLIFramework\ArgInfo;
 use PHPUnit\Framework\TestCase;
-
 
 class ArgumentInfoTest extends TestCase
 {
@@ -14,4 +14,3 @@ class ArgumentInfoTest extends TestCase
         $this->assertFalse($info->validate('foo'));
     }
 }
-

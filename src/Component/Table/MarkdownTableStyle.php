@@ -1,4 +1,5 @@
 <?php
+
 namespace CLIFramework\Component\Table;
 
 class MarkdownTableStyle extends TableStyle

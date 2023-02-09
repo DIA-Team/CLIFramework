@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the CLIFramework package.
  *
@@ -129,6 +130,6 @@ class CommandLoader
         if ($instance) {
             return $instance;
         }
-        return $instance = new self;
+        return $instance = new self();
     }
 }

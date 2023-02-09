@@ -33,7 +33,7 @@ class BashCompletionCommand extends Command implements CommandInterface
     {
         $programName = $this->options->program ?: $this->getApplication()->getProgramName();
         $bind = $this->options->bind ?: $programName;
-        $compName = '_'.preg_replace('#\W+#', '_', $programName);
+        $compName = '_' . preg_replace('#\W+#', '_', $programName);
         $generator = new BashGenerator($this->getApplication(), $programName, $bind, $compName);
         echo $generator->output();
     }

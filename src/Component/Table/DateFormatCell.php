@@ -1,4 +1,5 @@
 <?php
+
 namespace CLIFramework\Component\Table;
 
 use CLIFramework\Component\Table\CellAttribute;
@@ -8,7 +9,6 @@ use DateTime;
 
 class DateFormatCell extends NumberFormatCell
 {
-
     /**
      * IntlDateFormatter::FULL (integer)
         Completely specified style (Tuesday, April 12, 1952 AD or 3:30:42pm PST)

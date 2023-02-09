@@ -1,4 +1,5 @@
 <?php
+
 namespace CLIFramework;
 
 use Pimple\Container;
@@ -48,7 +49,7 @@ class ServiceContainer extends Container
         };
 
         $this['event'] = function () {
-            return new PhpEvent;
+            return new PhpEvent();
         };
 
         $this['config'] = function ($c) {
@@ -66,7 +67,7 @@ class ServiceContainer extends Container
             return new Logger($that);
         };
         $this['formatter'] = function ($c) {
-            return new Formatter;
+            return new Formatter();
         };
         $this['console.stty'] = function ($c) use ($that) {
             if ($that->isWindows()) {
@@ -97,7 +98,7 @@ class ServiceContainer extends Container
         static $instance;
 
         if (!$instance) {
-            $instance = new static;
+            $instance = new static();
         }
 
         return $instance;

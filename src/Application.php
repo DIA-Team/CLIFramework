@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the {{ }} package.
  *
@@ -12,7 +13,6 @@ namespace CLIFramework;
 
 use GetOptionKit\ContinuousOptionParser;
 use GetOptionKit\OptionCollection;
-
 use CLIFramework\CommandLoader;
 use CLIFramework\CommandBase;
 use CLIFramework\Logger;
@@ -26,10 +26,8 @@ use CLIFramework\Exception\CommandNotFoundException;
 use CLIFramework\Exception\CommandArgumentNotEnoughException;
 use CLIFramework\Exception\ExecuteMethodNotDefinedException;
 use Pimple\Container;
-
 use CLIFramework\ExceptionPrinter\ProductionExceptionPrinter;
 use CLIFramework\ExceptionPrinter\DevelopmentExceptionPrinter;
-
 use CLIFramework\Command\HelpCommand;
 use CLIFramework\Command\ZshCompletionCommand;
 use CLIFramework\Command\BashCompletionCommand;
@@ -37,7 +35,6 @@ use CLIFramework\Command\MetaCommand;
 use CLIFramework\Command\CompileCommand;
 use CLIFramework\Command\ArchiveCommand;
 use CLIFramework\Command\BuildGitHubWikiTopicsCommand;
-
 use Exception;
 use ReflectionClass;
 use InvalidArgumentException;
@@ -84,7 +81,7 @@ class Application extends CommandBase implements CommandInterface
     public $programName;
 
 
-    
+
 
     /**
      * @var CLIFramework\ServiceContainer
@@ -225,7 +222,7 @@ class Application extends CommandBase implements CommandInterface
 
     public function topic($topicId, $topicClass = null)
     {
-        $this->topics[$topicId] = $topicClass ? new $topicClass: $this->loadTopic($topicId);
+        $this->topics[$topicId] = $topicClass ? new $topicClass() : $this->loadTopic($topicId);
     }
 
     public function getTopic($topicId)
@@ -239,7 +236,7 @@ class Application extends CommandBase implements CommandInterface
     {
         // existing class name or full-qualified class name
         if (class_exists($topicId, true)) {
-            return new $topicId;
+            return new $topicId();
         }
         if (!preg_match('/Topic$/', $topicId)) {
             $className = ucfirst($topicId) . 'Topic';
@@ -250,7 +247,7 @@ class Application extends CommandBase implements CommandInterface
         foreach ($possibleNs as $ns) {
             $class = $ns . '\\' . 'Topic' . '\\' . $className;
             if (class_exists($class, true)) {
-                return new $class;
+                return new $class();
             }
         }
         throw new InvalidArgumentException("Topic $topicId not found.");
@@ -365,7 +362,6 @@ class Application extends CommandBase implements CommandInterface
 
             // if current command is in subcommand list.
             if ($currentCommand->hasCommands()) {
-
                 if (!$currentCommand->hasCommand($a)) {
                     if (!$appOptions->noInteract && ($guess = $currentCommand->guessCommand($a)) !== null) {
                         $a = $guess;
@@ -386,21 +382,15 @@ class Application extends CommandBase implements CommandInterface
                 $nextCommand->setOptions($result);
 
                 $commandStack[] = $currentCommand = $nextCommand; // save command object into the stack
-
             } else {
-
                 $r = $parser->continueParse();
 
                 if (count($r)) {
-
                     // get the option result and merge the new result
                     $currentCommand->getOptions()->merge($r);
-
                 } else {
-
                     $a = $parser->advance();
                     $arguments[] = $a;
-
                 }
             }
         }
@@ -413,14 +403,12 @@ class Application extends CommandBase implements CommandInterface
 
         // get last command and run
         if ($lastCommand = array_pop($commandStack)) {
-
             $return = $lastCommand->executeWrapper($arguments);
             $lastCommand->finish();
             while ($cmd = array_pop($commandStack)) {
                 // call finish stage.. of every command.
                 $cmd->finish();
             }
-
         } else {
             // no command specified.
             return $this->executeWrapper($arguments);
@@ -464,7 +452,8 @@ class Application extends CommandBase implements CommandInterface
     {
         if ($this->options->profile) {
             $this->logger->info(
-                sprintf('Memory usage: %.2fMB (peak: %.2fMB), time: %.4fs',
+                sprintf(
+                    'Memory usage: %.2fMB (peak: %.2fMB), time: %.4fs',
                     memory_get_usage(true) / (1024 * 1024),
                     memory_get_peak_usage(true) / (1024 * 1024),
                     (microtime(true) - $this->startedAt)
@@ -573,6 +562,6 @@ class Application extends CommandBase implements CommandInterface
         if ($app) {
             return $app;
         }
-        return $app = new static;
+        return $app = new static();
     }
 }

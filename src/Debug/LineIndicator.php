@@ -1,4 +1,5 @@
 <?php
+
 namespace CLIFramework\Debug;
 
 class LineIndicator
@@ -6,7 +7,7 @@ class LineIndicator
     protected $contextLines = 4;
 
     protected $indicatedLineFormat = "> % 4d| %s";
-    
+
     protected $contextLineFormat = "  % 4d| %s";
 
     public function __construct()

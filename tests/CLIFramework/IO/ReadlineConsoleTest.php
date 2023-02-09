@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the {{ }} package.
  *
@@ -8,6 +9,7 @@
  * file that was distributed with this source code.
  *
  */
+
 namespace tests\CLIFramework\IO;
 
 use CLIFramework\IO\ReadlineConsole;
@@ -25,8 +27,8 @@ class ReadlineConsoleTest extends ConsoleTestCase
         }
 
         $script = __DIR__ . '/../../script/CLIFramework/IO/ReadlineConsoleReadLine.php';
-        $self = $this;
-        $this->runScript($script, "foo\n", function($line) use($self) {
+        $self   = $this;
+        $this->runScript($script, "foo\n", function ($line) use ($self) {
             $self->assertEquals("foo", $line);
         });
     }
@@ -40,8 +42,8 @@ class ReadlineConsoleTest extends ConsoleTestCase
         }
 
         $script = __DIR__ . '/../../script/CLIFramework/IO/ReadlineConsoleReadPassword.php';
-        $self = $this;
-        $this->runScript($script, "test\n", function($line) use($self) {
+        $self   = $this;
+        $this->runScript($script, "test\n", function ($line) use ($self) {
             $self->assertEquals("test", $line);
         });
     }

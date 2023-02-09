@@ -1,7 +1,7 @@
 <?php
-use PHPUnit\Framework\TestCase;
 
 use CLIFramework\Utils;
+use PHPUnit\Framework\TestCase;
 
 class UtilsTest extends TestCase
 {
@@ -12,4 +12,3 @@ class UtilsTest extends TestCase
         $this->assertFileExists($path);
     }
 }
-

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the CLIFramework package.
  *
@@ -8,11 +9,13 @@
  * file that was distributed with this source code.
  *
  */
+
 namespace tests\CLIFramework\IO;
 
 use CLIFramework\IO\NullStty;
+use PHPUnit\Framework\TestCase;
 
-class NullSttyTest extends \PHPUnit\Framework\TestCase 
+class NullSttyTest extends TestCase
 {
     private $stty;
 
@@ -38,9 +41,11 @@ class NullSttyTest extends \PHPUnit\Framework\TestCase
 
     function testWithoutEcho()
     {
-        $this->assertSame('echo', $this->stty->withoutEcho(function() {
-            return 'echo';
-        }));
+        $this->assertSame(
+            'echo',
+            $this->stty->withoutEcho(function () {
+                return 'echo';
+            })
+        );
     }
 }
-

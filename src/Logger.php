@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the CLIFramework package.
  *
@@ -289,6 +290,6 @@ class Logger
     public static function getInstance()
     {
         static $instance;
-        return $instance ? $instance : $instance = new static;
+        return $instance ? $instance : $instance = new static();
     }
 }

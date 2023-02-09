@@ -43,6 +43,6 @@ class UnixStty implements Stty
             return;
         }
 
-        shell_exec('stty '.$style);
+        shell_exec('stty ' . $style);
     }
 }

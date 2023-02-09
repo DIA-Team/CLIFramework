@@ -76,7 +76,7 @@ function is_assoc_array(array $array)
 
 function as_shell_string($str)
 {
-    return '"'.addcslashes($str, '"').'"';
+    return '"' . addcslashes($str, '"') . '"';
 }
 
 /**
@@ -87,17 +87,17 @@ function encode_array_as_shell_string($array)
     if (is_assoc_array($array)) {
         $output = array();
         foreach ($array as $key => $val) {
-            $output[] = $key.':'.addcslashes($val, ': ');
+            $output[] = $key . ':' . addcslashes($val, ': ');
         }
 
-        return '"'.addcslashes(implode(' ', $output), '"').'"';
+        return '"' . addcslashes(implode(' ', $output), '"') . '"';
     } else {
         $output = array();
         foreach ($array as $val) {
             $output[] = addcslashes($val, ': ');
         }
 
-        return '"'.addcslashes(implode(' ', $output), '"').'"';
+        return '"' . addcslashes(implode(' ', $output), '"') . '"';
     }
 }
 
@@ -135,13 +135,13 @@ class MetaCommand extends Command
             array_shift($commandNames);
         }
 
-        $this->logger->debug('Finding command '.get_class($cmd));
+        $this->logger->debug('Finding command ' . get_class($cmd));
 
         while (!empty($commandNames) && $cmd->hasCommands()) {
             $commandName = array_shift($commandNames);
-            $this->logger->debug('Finding command '.$commandName);
+            $this->logger->debug('Finding command ' . $commandName);
             $cmd = $cmd->getCommand($commandName);
-            $this->logger->debug('Found command class '.get_class($cmd));
+            $this->logger->debug('Found command class ' . get_class($cmd));
         }
 
         // 'arg' or 'opt' require the argument name and attribute type
@@ -155,84 +155,84 @@ class MetaCommand extends Command
             }
 
             switch ($type) {
-            case 'arg':
-                $idx = intval($arg);
-                $arginfos = $cmd->getArgInfoList();
+                case 'arg':
+                    $idx = intval($arg);
+                    $arginfos = $cmd->getArgInfoList();
 
-                if (!isset($arginfos[ $idx ])) {
-                    throw new UndefinedArgumentException("Undefined argument at $idx");
-                }
+                    if (!isset($arginfos[ $idx ])) {
+                        throw new UndefinedArgumentException("Undefined argument at $idx");
+                    }
 
-                $argInfo = $arginfos[$idx];
+                    $argInfo = $arginfos[$idx];
 
-                switch ($attr) {
-                case 'suggestions':
-                    if ($values = $argInfo->getSuggestions()) {
-                        return $this->outputValues($values, $this->options);
+                    switch ($attr) {
+                        case 'suggestions':
+                            if ($values = $argInfo->getSuggestions()) {
+                                return $this->outputValues($values, $this->options);
+                            }
+                            break;
+
+                        case 'valid-values':
+                            if ($values = $argInfo->getValidValues()) {
+                                return $this->outputValues($values, $this->options);
+                            }
+                            break;
                     }
                     break;
-
-                case 'valid-values':
-                    if ($values = $argInfo->getValidValues()) {
-                        return $this->outputValues($values, $this->options);
+                case 'opts':
+                    $options = $cmd->getOptionCollection();
+                    $values = array();
+                    foreach ($options as $opt) {
+                        if ($opt->short) {
+                            $values[] = '-' . $opt->short;
+                        } elseif ($opt->long) {
+                            $values[] = '--' . $opt->long;
+                        }
                     }
-                    break;
-                }
+                    echo implode(' ', $values) , "\n";
+
+                    return;
                 break;
-            case 'opts':
-                $options = $cmd->getOptionCollection();
-                $values = array();
-                foreach ($options as $opt) {
-                    if ($opt->short) {
-                        $values[] = '-'.$opt->short;
-                    } elseif ($opt->long) {
-                        $values[] = '--'.$opt->long;
+                case 'opt':
+                    $options = $cmd->getOptionCollection();
+                    $option = $options->find($arg);
+                    if (!$option) {
+                        throw new UndefinedOptionException("Option '$arg' not found", $cmd, $options);
                     }
-                }
-                echo implode(' ', $values) , "\n";
-
-                return;
-                break;
-            case 'opt':
-                $options = $cmd->getOptionCollection();
-                $option = $options->find($arg);
-                if (!$option) {
-                    throw new UndefinedOptionException("Option '$arg' not found", $cmd, $options);
-                }
-                switch ($attr) {
-                case 'isa':
-                    return output($option->isa);
-                    break;
-                case 'valid-values':
-                    if ($values = $option->getValidValues()) {
-                        return $this->outputValues($values, $this->options);
+                    switch ($attr) {
+                        case 'isa':
+                            return output($option->isa);
+                        break;
+                        case 'valid-values':
+                            if ($values = $option->getValidValues()) {
+                                return $this->outputValues($values, $this->options);
+                            }
+                            break;
+                        case 'suggestions':
+                            if ($values = $option->getSuggestions()) {
+                                return $this->outputValues($values, $this->options);
+                            }
+                            break;
                     }
                     break;
-                case 'suggestions':
-                    if ($values = $option->getSuggestions()) {
-                        return $this->outputValues($values, $this->options);
-                    }
-                    break;
-                }
-                break;
-            default:
-                throw new Exception("Invalid type '$type', valid types are 'arg', 'opt', 'opts'");
+                default:
+                    throw new Exception("Invalid type '$type', valid types are 'arg', 'opt', 'opts'");
                 break;
             }
         } catch (UnsupportedShellException $e) {
-            fwrite(STDERR, $e->getMessage()."\n");
+            fwrite(STDERR, $e->getMessage() . "\n");
             fwrite(STDERR, "Supported shells: zsh, bash\n");
         } catch (UndefinedOptionException $e) {
-            fwrite(STDERR, $e->command->getSignature()."\n");
-            fwrite(STDERR, $e->getMessage()."\n");
+            fwrite(STDERR, $e->command->getSignature() . "\n");
+            fwrite(STDERR, $e->getMessage() . "\n");
             fwrite(STDERR, "Valid options:\n");
             foreach ($e->options as $opt) {
                 if ($opt->short && $opt->long) {
-                    fwrite(STDERR, ' '.$opt->short.'|'.$opt->long);
+                    fwrite(STDERR, ' ' . $opt->short . '|' . $opt->long);
                 } elseif ($opt->short) {
-                    fwrite(STDERR, ' '.$opt->short);
+                    fwrite(STDERR, ' ' . $opt->short);
                 } elseif ($opt->long) {
-                    fwrite(STDERR, ' '.$opt->long);
+                    fwrite(STDERR, ' ' . $opt->long);
                 }
                 fwrite(STDERR, "\n");
             }
@@ -248,7 +248,6 @@ class MetaCommand extends Command
 
         // encode complex data structure to shell
         if ($values instanceof ValueCollection) {
-
             // this output format works both in zsh & bash
             if ($opts->flat) {
                 $buf = new Buffer();
@@ -267,10 +266,10 @@ class MetaCommand extends Command
 
                 // zsh and bash only supports one dimensional array, so we can only output values in string and separate these values with space.
                 foreach ($values as $groupId => $groupValues) {
-                    $buf->appendLine("groups[$groupId]=".encode_array_as_shell_string($groupValues));
+                    $buf->appendLine("groups[$groupId]=" . encode_array_as_shell_string($groupValues));
                 }
                 foreach ($values->getGroupLabels() as $groupId => $label) {
-                    $buf->appendLine("labels[$groupId]=".as_shell_string($label));
+                    $buf->appendLine("labels[$groupId]=" . as_shell_string($label));
                 }
                 $this->logger->write($buf);
             } elseif ($opts->json) {
@@ -289,7 +288,7 @@ class MetaCommand extends Command
                 // for zsh, we output the first line as the label
                 foreach ($values as $value) {
                     list($key, $val) = $value;
-                    $this->logger->writeln("$key:".addcslashes($val, ':'));
+                    $this->logger->writeln("$key:" . addcslashes($val, ':'));
                 }
             } else {
                 foreach ($values as $value) {
@@ -303,7 +302,7 @@ class MetaCommand extends Command
             $this->logger->writeln('#descriptions');
             if ($opts->zsh) {
                 foreach ($values as $key => $desc) {
-                    $this->logger->writeln("$key:".addcslashes($desc, ':'));
+                    $this->logger->writeln("$key:" . addcslashes($desc, ':'));
                 }
             } else {
                 foreach ($values as $key => $desc) {

@@ -1,4 +1,5 @@
 <?php
+
 namespace CLIFramework;
 
 class LevenshteinCorrector extends Corrector
@@ -10,14 +11,12 @@ class LevenshteinCorrector extends Corrector
 
         // loop through words to find the closest
         foreach ($this->possibleTokens as $word) {
-
             // calculate the distance between the input word,
             // and the current word
             $lev = levenshtein($input, $word);
 
             // check for an exact match
             if ($lev == 0) {
-
                 // closest word is this one (exact match)
                 $closest = $word;
                 $shortest = 0;

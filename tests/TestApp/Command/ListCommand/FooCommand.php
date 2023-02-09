@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the {{ }} package.
  *
@@ -8,13 +9,14 @@
  * file that was distributed with this source code.
  *
  */
+
 namespace TestApp\Command\ListCommand;
+
 use CLIFramework\Command;
 
 /** Test process stage **/
 class FooCommand extends Command
 {
-
     function prepare()
     {
         global $_prepare;
@@ -33,5 +35,3 @@ class FooCommand extends Command
         $_finish = 1;
     }
 }
-
-

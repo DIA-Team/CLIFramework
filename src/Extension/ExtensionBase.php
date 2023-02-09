@@ -1,4 +1,5 @@
 <?php
+
 namespace CLIFramework\Extension;
 
 use CLIFramework\ServiceContainer;

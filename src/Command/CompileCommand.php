@@ -88,7 +88,8 @@ class CompileCommand extends Command
             foreach ($options->include as $include) {
                 $phar->buildFromIterator(
                     new RecursiveIteratorIterator(
-                        new RecursiveDirectoryIterator($include)),
+                        new RecursiveDirectoryIterator($include)
+                    ),
                     getcwd()
                 );
             }
@@ -101,8 +102,10 @@ class CompileCommand extends Command
             }
 
             $src_dir = realpath($src_dir);
-            $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($src_dir),
-                                    RecursiveIteratorIterator::CHILD_FIRST);
+            $iterator = new RecursiveIteratorIterator(
+                new RecursiveDirectoryIterator($src_dir),
+                RecursiveIteratorIterator::CHILD_FIRST
+            );
 
             // compile php file only (currently)
             foreach ($iterator as $path) {
@@ -112,13 +115,13 @@ class CompileCommand extends Command
                     if ($excludePatterns) {
                         $exclude = false;
                         foreach ($excludePatterns as $pattern) {
-                            if (preg_match('#'.$pattern.'#', $rel_path)) {
+                            if (preg_match('#' . $pattern . '#', $rel_path)) {
                                 $exclude = true;
                                 break;
                             }
                         }
                         if ($exclude) {
-                            $logger->debug2('exclude '.$rel_path);
+                            $logger->debug2('exclude ' . $rel_path);
                             continue;
                         }
                     }
@@ -127,10 +130,10 @@ class CompileCommand extends Command
                     if (preg_match('/\.php$/', $path->getFilename())) {
                         $content = php_strip_whitespace($path->getRealPath());
                         # echo $path->getPathname() . "\n";
-                        $logger->debug2('add '.$rel_path);
+                        $logger->debug2('add ' . $rel_path);
                         $phar->addFromString($rel_path, $content);
                     } else {
-                        $logger->debug2('add '.$rel_path);
+                        $logger->debug2('add ' . $rel_path);
                         $phar->addFile($path->getPathname(), $rel_path);
                     }
                 }
@@ -200,14 +203,14 @@ EOT;
             $compress_type = null;
         } elseif ($options->compress) {
             switch ($v = $options->compress) {
-            case 'gz':
-                $compress_type = Phar::GZ;
-                break;
-            case 'bz2':
-                $compress_type = Phar::BZ2;
-                break;
-            default:
-                throw new Exception("Compress type: $v is not supported, valids are gz, bz2");
+                case 'gz':
+                    $compress_type = Phar::GZ;
+                    break;
+                case 'bz2':
+                    $compress_type = Phar::BZ2;
+                    break;
+                default:
+                    throw new Exception("Compress type: $v is not supported, valids are gz, bz2");
                 break;
             }
         }

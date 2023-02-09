@@ -1,5 +1,4 @@
 vendor/
-src/PHPBrew/
-build/
-.onion
-.hhconfig
+/.idea/
+.phpunit.result.cache
+/tmp

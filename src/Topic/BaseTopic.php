@@ -1,4 +1,5 @@
 <?php
+
 namespace CLIFramework\Topic;
 
 abstract class BaseTopic

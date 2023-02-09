@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the CLIFramework package.
  *
@@ -13,4 +14,4 @@ require 'vendor/autoload.php';
 $prompter = new CLIFramework\Prompter();
 $line = $prompter->password('Your Password:');
 echo "input value: ";
-var_dump($line); 
+var_dump($line);

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the GetOptionKit package.
  *
@@ -9,71 +10,72 @@
  *
  */
 
-if( !defined('DEBUG_BACKTRACE_PROVIDE_OBJECT') )
-    define('DEBUG_BACKTRACE_PROVIDE_OBJECT',1);
-
-function ok( $v , $msg = null )
-{
-    $stacks = debug_backtrace( DEBUG_BACKTRACE_PROVIDE_OBJECT ); # XXX: limit is only availabel in PHP5.4
-    $testobj = $stacks[1]['object'];
-    $testobj->assertTrue( $v ? true : false , $msg );
+if (!defined('DEBUG_BACKTRACE_PROVIDE_OBJECT')) {
+    define('DEBUG_BACKTRACE_PROVIDE_OBJECT', 1);
 }
 
-function not_ok( $v , $msg = null )
+function ok($v, $msg = null)
 {
-    $stacks = debug_backtrace( DEBUG_BACKTRACE_PROVIDE_OBJECT ); # XXX: limit is only availabel in PHP5.4
+    $stacks  = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT); # XXX: limit is only availabel in PHP5.4
     $testobj = $stacks[1]['object'];
-    $testobj->assertFalse( $v ? true : false , $msg );
+    $testobj->assertTrue($v ? true : false, $msg);
 }
 
-function is( $expected , $v , $msg = null )
+function not_ok($v, $msg = null)
 {
-    $stacks = debug_backtrace( DEBUG_BACKTRACE_PROVIDE_OBJECT ); # XXX: limit is only availabel in PHP5.4
+    $stacks  = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT); # XXX: limit is only availabel in PHP5.4
     $testobj = $stacks[1]['object'];
-    $testobj->assertEquals( $expected , $v , $msg );
+    $testobj->assertFalse($v ? true : false, $msg);
 }
 
-function is_class( $expected , $v , $msg = null )
+function is($expected, $v, $msg = null)
 {
-    $stacks = debug_backtrace( DEBUG_BACKTRACE_PROVIDE_OBJECT ); # XXX: limit is only availabel in PHP5.4
+    $stacks  = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT); # XXX: limit is only availabel in PHP5.4
     $testobj = $stacks[1]['object'];
-    $testobj->assertInstanceOf( $expected , $v , $msg );
+    $testobj->assertEquals($expected, $v, $msg);
 }
 
-function count_ok( $expected,$v, $msg = null ) 
+function is_class($expected, $v, $msg = null)
 {
-    $stacks = debug_backtrace( DEBUG_BACKTRACE_PROVIDE_OBJECT ); # XXX: limit is only availabel in PHP5.4
+    $stacks  = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT); # XXX: limit is only availabel in PHP5.4
     $testobj = $stacks[1]['object'];
-    $testobj->assertCount( $expected , $v , $msg );
+    $testobj->assertInstanceOf($expected, $v, $msg);
+}
+
+function count_ok($expected, $v, $msg = null)
+{
+    $stacks  = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT); # XXX: limit is only availabel in PHP5.4
+    $testobj = $stacks[1]['object'];
+    $testobj->assertCount($expected, $v, $msg);
 }
 
 
-function like( $e, $v , $msg = null )
+function like($e, $v, $msg = null)
 {
-    $stacks = debug_backtrace( DEBUG_BACKTRACE_PROVIDE_OBJECT ); # XXX: limit is only availabel in PHP5.4
+    $stacks  = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT); # XXX: limit is only availabel in PHP5.4
     $testobj = $stacks[1]['object'];
-    $testobj->assertRegExp($e,$v,$msg);
+    $testobj->assertRegExp($e, $v, $msg);
 }
 
-function is_true($e,$v,$msg = null)
+function is_true($e, $v, $msg = null)
 {
-    $stacks = debug_backtrace( DEBUG_BACKTRACE_PROVIDE_OBJECT ); # XXX: limit is only availabel in PHP5.4
+    $stacks  = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT); # XXX: limit is only availabel in PHP5.4
     $testobj = $stacks[1]['object'];
-    $testobj->assertTrue($e,$v,$msg);
+    $testobj->assertTrue($e, $v, $msg);
 }
 
-function is_false($e,$v,$msg= null)
+function is_false($e, $v, $msg = null)
 {
-    $stacks = debug_backtrace( DEBUG_BACKTRACE_PROVIDE_OBJECT ); # XXX: limit is only availabel in PHP5.4
+    $stacks  = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT); # XXX: limit is only availabel in PHP5.4
     $testobj = $stacks[1]['object'];
-    $testobj->assertFalse($e,$v,$msg);
+    $testobj->assertFalse($e, $v, $msg);
 }
 
-function file_equals($e,$v,$msg = null)
+function file_equals($e, $v, $msg = null)
 {
-    $stacks = debug_backtrace( DEBUG_BACKTRACE_PROVIDE_OBJECT ); # XXX: limit is only availabel in PHP5.4
+    $stacks  = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT); # XXX: limit is only availabel in PHP5.4
     $testobj = $stacks[1]['object'];
-    $testobj->assertFileEquals($e,$v,$msg);
+    $testobj->assertFileEquals($e, $v, $msg);
 }
 
 function dump($e)
@@ -81,5 +83,3 @@ function dump($e)
     var_dump($e);
     ob_flush();
 }
-
-

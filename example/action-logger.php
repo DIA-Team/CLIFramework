@@ -1,10 +1,11 @@
 <?php
+
 require 'vendor/autoload.php';
 
 use CLIFramework\Logger\ActionLogger;
 use CLIFramework\Formatter;
 
-$logger = new ActionLogger(fopen('php://stderr','w'), new Formatter);
+$logger = new ActionLogger(fopen('php://stderr', 'w'), new Formatter());
 
 
 foreach (['ProductSchema','OrderSchema', 'OrderItemSchema'] as $title) {

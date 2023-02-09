@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the GetOptionKit package.
  *
@@ -8,6 +9,7 @@
  * file that was distributed with this source code.
  *
  */
+
 namespace CLIFramework;
 
 use GetOptionKit\OptionCollection;
@@ -23,7 +25,7 @@ class OptionPrinter implements OptionPrinterInterface
 
     public function __construct()
     {
-        $this->formatter = new Formatter;
+        $this->formatter = new Formatter();
     }
 
     /**

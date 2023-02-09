@@ -12,7 +12,6 @@ use CodeGen\Statement\RequireStatement;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\ClassLoader\ClassMapGenerator;
 use CLIFramework\Logger;
-
 use Universal\ClassLoader\ClassLoader;
 use Universal\ClassLoader\Psr0ClassLoader;
 use Universal\ClassLoader\Psr4ClassLoader;
@@ -65,7 +64,7 @@ class ComposerAutoloadGenerator
 
     public function traceAutoloadsWithRequirements(array $config, array $requirements = array())
     {
-        $this->logger->debug('Tracing autoload from package: '.@$config['name']);
+        $this->logger->debug('Tracing autoload from package: ' . @$config['name']);
 
         $autoloads = array();
         foreach ($requirements as $packageName => $requirement) {
@@ -77,9 +76,9 @@ class ComposerAutoloadGenerator
 
             // get config from composer.json
             if (isset($config['name']) && $config['name'] === $packageName) {
-                $packageComposerJson = $this->workingDir.DIRECTORY_SEPARATOR.'composer.json';
+                $packageComposerJson = $this->workingDir . DIRECTORY_SEPARATOR . 'composer.json';
             } else {
-                $packageComposerJson = $this->workingDir.DIRECTORY_SEPARATOR.$this->vendorDir.DIRECTORY_SEPARATOR.$packageName.DIRECTORY_SEPARATOR.'composer.json';
+                $packageComposerJson = $this->workingDir . DIRECTORY_SEPARATOR . $this->vendorDir . DIRECTORY_SEPARATOR . $packageName . DIRECTORY_SEPARATOR . 'composer.json';
             }
 
             if (file_exists($packageComposerJson)) {
@@ -115,33 +114,32 @@ class ComposerAutoloadGenerator
             if ($isRoot) {
                 $baseDir = $this->workingDir;
             } else {
-                $baseDir = $this->workingDir.DIRECTORY_SEPARATOR.$this->vendorDir.DIRECTORY_SEPARATOR.$config['name'];
+                $baseDir = $this->workingDir . DIRECTORY_SEPARATOR . $this->vendorDir . DIRECTORY_SEPARATOR . $config['name'];
             }
 
             // target-dir is deprecated, but somehow we need to support some
             // psr-0 class loader with target-dir
             // @see https://getcomposer.org/doc/04-schema.md#target-dir
             if (isset($config['target-dir'])) {
-                $this->logger->warn("Found deprecated property 'target-dir' in package ".$config['name']);
+                $this->logger->warn("Found deprecated property 'target-dir' in package " . $config['name']);
 
                 $baseDir = $config['target-dir'];
                 $autoloads[$config['name']] = $this->prependAutoloadPathPrefix($config['autoload'], $config['target-dir']);
             }
 
             if (isset($config['autoload']['classmap'])) {
-
                 // Expand and replace classmap array
                 $map = array();
                 foreach ($config['autoload']['classmap'] as $path) {
                     $this->logger->debug("Scanning classmap in $path");
-                    $map = array_merge($map, ClassMapGenerator::createMap($baseDir.DIRECTORY_SEPARATOR.$path));
+                    $map = array_merge($map, ClassMapGenerator::createMap($baseDir . DIRECTORY_SEPARATOR . $path));
                 }
 
                 // Strip paths with working directory:
                 // ClassMapGenerator returns class map with files in absolute paths,
                 // We need them to be relative paths.
                 foreach ($map as $k => $filepath) {
-                    $map[$k] = str_replace($baseDir.DIRECTORY_SEPARATOR, '', $filepath);
+                    $map[$k] = str_replace($baseDir . DIRECTORY_SEPARATOR, '', $filepath);
                 }
 
                 $config['autoload']['classmap'] = $map;
@@ -165,10 +163,10 @@ class ComposerAutoloadGenerator
             foreach ($autoloadConfig as $ns => $path) {
                 if (is_array($path)) {
                     $newConfig[ $ns ] = array_map($path, function ($p) use ($prefix) {
-                        return $prefix.$p;
+                        return $prefix . $p;
                     });
                 } else {
-                    $newConfig[ $ns ] = $prefix.$path;
+                    $newConfig[ $ns ] = $prefix . $path;
                 }
             }
             $newAutoloads[ $autoloadType ] = $newConfig;
@@ -182,7 +180,7 @@ class ComposerAutoloadGenerator
         // Find composer.json files that are not in their corresponding package directory
         $finder = new Finder();
         $finder->name('composer.json');
-        $finder->in($this->workingDir.DIRECTORY_SEPARATOR.$this->vendorDir);
+        $finder->in($this->workingDir . DIRECTORY_SEPARATOR . $this->vendorDir);
         foreach ($finder as $file) {
             $config = json_decode(file_get_contents($file), true);
             if (isset($config['name'])) {
@@ -193,7 +191,7 @@ class ComposerAutoloadGenerator
 
     public function generate($composerConfigFile, $pharFile = 'output.phar')
     {
-        $pharMap = 'phar://'.$pharFile.'/';
+        $pharMap = 'phar://' . $pharFile . '/';
         $autoloads = $this->traceAutoloadsWithComposerJson($composerConfigFile, $this->vendorDir, true);
 
         $psr0 = array();
@@ -207,7 +205,7 @@ class ComposerAutoloadGenerator
             // The returned autoload paths are relative paths in their packages
             // We need to prepend the package base dir path
             if (!isset($config['root'])) {
-                $autoload = $this->prependAutoloadPathPrefix($autoload, $pharMap.$this->vendorDir.DIRECTORY_SEPARATOR.$packageName.DIRECTORY_SEPARATOR);
+                $autoload = $this->prependAutoloadPathPrefix($autoload, $pharMap . $this->vendorDir . DIRECTORY_SEPARATOR . $packageName . DIRECTORY_SEPARATOR);
             } else {
                 $autoload = $this->prependAutoloadPathPrefix($autoload, $pharMap);
             }
@@ -222,7 +220,6 @@ class ComposerAutoloadGenerator
                 $files = array_merge($files, $autoload['files']);
             }
             if (isset($autoload['classmap'])) {
-
                 // the classmap here is an expanded classmap associative array
                 $map = array_merge($map, $autoload['classmap']);
             }

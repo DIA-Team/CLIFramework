@@ -1,13 +1,13 @@
 <?php
+
 namespace DemoApp\Command;
-use CLIFramework\ServiceContainer;
+
 use CLIFramework\Command;
 use CLIFramework\Extension\DaemonExtension;
 use RuntimeException;
 
 class ServerCommand extends Command
 {
-
     public function brief()
     {
         return 'An example of using DaemonExtension';
@@ -16,17 +16,16 @@ class ServerCommand extends Command
     public function init()
     {
         if (DaemonExtension::isSupported()) {
-            $this->addExtension(new DaemonExtension);
+            $this->addExtension(new DaemonExtension());
         }
     }
 
     public function execute($host, $port)
     {
-
         $server = stream_socket_server("tcp://$host:$port", $errno, $errorMessage);
 
         if ($server === false) {
-            throw new \RuntimeException("Could not bind to socket: $errorMessage");
+            throw new RuntimeException("Could not bind to socket: $errorMessage");
         }
 
         for (;;) {

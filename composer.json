@@ -2,7 +2,7 @@
     "name": "dia-team/cliframework",
     "homepage": "http://github.com/c9s/CLIFramework",
     "description": "Command-line framework for PHP",
-    "version": "3.0.6",
+    "version": "3.0.7",
     "keywords": [
         "command",
         "command-line",
@@ -13,6 +13,12 @@
     ],
     "require": {
         "php": ">=7.4.0",
+        "ext-intl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "ext-pcntl": "*",
+        "ext-readline": "*",
+        "ext-posix": "*",
         "corneltek/getoptionkit": "~2.5.4",
         "corneltek/universal": "^1.7",
         "corneltek/codegen": "~3.2",
@@ -21,18 +27,45 @@
         "symfony/class-loader": "*"
     },
     "require-dev": {
-        "ext-intl": "*",
+        "brianium/paratest": "*",
         "corneltek/phpunit-testmore": "dev-master",
-        "brianium/paratest": "*"
+        "docopt/docopt": ">1.0",
+        "ext-intl": "*",
+        "maglnet/composer-require-checker": ">=2.0",
+        "phan/phan": "^3.1",
+        "phpunit/phpunit": ">8.5"
     },
     "license": "MIT",
     "authors": [
         { "name": "Yo-An Lin", "email": "yoanlin93@gmail.com" }
     ],
+    "scripts": {
+        "cs": "phpcs --colors --parallel=3 -s -n --cache --report=full .phan src tests",
+        "fix": "phpcbf -p --warning-severity=0 .phpcs.xml .phan src tests",
+        "phan" : "phan -p --color",
+        "test" : "@phpunit"
+    },
+    "scripts-descriptions": {
+        "check": "Check code base with all tools available",
+        "cs" : "Detect coding standard violations",
+        "fix": "Fix coding standard violations",
+        "phan" : "Run static code analyzer",
+        "test" : "Run unit tests"
+    },
     "autoload": {
         "psr-4": {
             "CLIFramework\\": "src/"
         }
     },
-    "extra": { "branch-alias": { "dev-master": "4.0.x-dev" } }
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "extra": { "branch-alias": { "dev-master": "4.0.x-dev" } },
+    "config": {
+        "allow-plugins": {
+            "phpro/grumphp": true
+        }
+    }
 }

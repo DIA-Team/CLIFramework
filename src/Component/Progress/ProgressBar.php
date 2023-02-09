@@ -1,4 +1,5 @@
 <?php
+
 namespace CLIFramework\Component\Progress;
 
 use Exception;
@@ -59,7 +60,7 @@ class ProgressBar implements ProgressReporter
                 $this->console = $container['consoleInfo'];
             }
         } else {
-            $this->formatter = new Formatter;
+            $this->formatter = new Formatter();
             $this->console = ConsoleInfoFactory::create();
             $this->updateLayout();
         }
@@ -130,8 +131,7 @@ class ProgressBar implements ProgressReporter
             . str_repeat(' ', max($barSize - $sharps, 0))
             . Colors::decorate($this->rightDecorator, $trigger ? 'purple' : 'light_purple')
             . $this->columnDecorator
-            . Colors::decorate($desc, $trigger ? 'light_gray' : 'white')
-            );
+            . Colors::decorate($desc, $trigger ? 'light_gray' : 'white'));
 
         // hide cursor
         // fputs($this->stream, "\033[?25l");

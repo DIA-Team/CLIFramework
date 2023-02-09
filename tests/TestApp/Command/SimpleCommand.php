@@ -1,11 +1,11 @@
 <?php
+
 namespace TestApp\Command;
+
 use CLIFramework\Command;
-use Exception;
 
 class SimpleCommand extends Command
 {
-
     public function help()
     {
         return <<<HELP
@@ -26,7 +26,3 @@ HELP;
         return $var;
     }
 }
-
-
-
-

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the CLIFramework package.
  *
@@ -8,22 +9,23 @@
  * file that was distributed with this source code.
  *
  */
+
 namespace tests\CLIFramework\Extension;
-use CLIFramework\Extension\DaemonExtension;
-use CLIFramework\Command;
+
 use CLIFramework\Application;
-use CLIFramework\ServiceContainer;
+use CLIFramework\Command;
+use CLIFramework\Extension\DaemonExtension;
 use PHPUnit\Framework\TestCase;
 
-class DaemonExtensionTest extends TestCase 
+class DaemonExtensionTest extends TestCase
 {
     private $extension;
 
     private $command;
 
-    public function setUp() : void
+    public function setUp(): void
     {
-        $extension = new DaemonExtensionForTest;
+        $extension = new DaemonExtensionForTest();
         if (!$extension->isAvailable()) {
             $this->markTestSkipped('DaemonExtension is not available.');
         }
@@ -37,10 +39,10 @@ class DaemonExtensionTest extends TestCase
 
     public function testRun()
     {
-        $this->command->executeWrapper(array());
+        $this->command->executeWrapper([]);
     }
 
-    public function tearDown() : void
+    public function tearDown(): void
     {
     }
 }
@@ -54,7 +56,7 @@ class DaemonExtensionTestCommand extends Command
 {
     public function init()
     {
-        $this->extension(new DaemonExtensionForTest);
+        $this->extension(new DaemonExtensionForTest());
     }
 
     public function execute()

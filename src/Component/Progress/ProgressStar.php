@@ -1,4 +1,5 @@
 <?php
+
 namespace CLIFramework\Component\Progress;
 
 class ProgressStar implements ProgressReporter
@@ -49,9 +50,13 @@ class ProgressStar implements ProgressReporter
             }
 
             /* 8 + 1 + 60 + 1 + 1 + 1 + 6 = */
-            printf("\r\tFetching %-60s %s % -3.1f%% %s", $this->url,
+            printf(
+                "\r\tFetching %-60s %s % -3.1f%% %s",
+                $this->url,
                 $this->stars[ $this->i ],
-                $percent * 100, $this->prettySize($downloaded));
+                $percent * 100,
+                $this->prettySize($downloaded)
+            );
         }
     }
 }

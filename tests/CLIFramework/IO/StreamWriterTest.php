@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the {{ }} package.
  *
@@ -8,22 +9,24 @@
  * file that was distributed with this source code.
  *
  */
+
 namespace tests\CLIFramework\IO;
 
 use CLIFramework\IO\StreamWriter;
+use PHPUnit\Framework\TestCase;
 
-class StreamWriterTest extends \PHPUnit\Framework\TestCase 
+class StreamWriterTest extends TestCase
 {
     private $writer;
     private $stream;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         $this->stream = fopen('php://memory', 'rw');
         $this->writer = new StreamWriter($this->stream);
     }
 
-    public function tearDown() : void
+    public function tearDown(): void
     {
         fclose($this->stream);
     }
@@ -32,6 +35,12 @@ class StreamWriterTest extends \PHPUnit\Framework\TestCase
     {
         $this->writer->write("test");
         $this->assertStreamSame("test");
+    }
+
+    function assertStreamSame($expected)
+    {
+        fseek($this->stream, 0);
+        $this->assertSame($expected, stream_get_contents($this->stream));
     }
 
     function testWriteln()
@@ -44,11 +53,5 @@ class StreamWriterTest extends \PHPUnit\Framework\TestCase
     {
         $this->writer->writef("%s:%s", "test", "writef");
         $this->assertStreamSame("test:writef");
-    }
-
-    function assertStreamSame($expected)
-    {
-        fseek($this->stream, 0);
-        $this->assertSame($expected, stream_get_contents($this->stream));
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace CLIFramework\Testing;
 
 class ConsoleTestCase extends \PHPUnit\Framework\TestCase
@@ -17,7 +18,7 @@ class ConsoleTestCase extends \PHPUnit\Framework\TestCase
         // $_ENV is only populated if php.ini allows it, which it doesn't seem to
         // do by default, at least not in the default WAMP server installation.
         //
-        // 
+        //
         $php = PHP_BINARY;
         $command = "$php $path";
 

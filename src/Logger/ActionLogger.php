@@ -44,11 +44,12 @@ class LogAction
     protected function update($style = 'green')
     {
         $padding = max($this->actionColumnWidth - strlen($this->title), 1);
-        $buf = sprintf('  %s % -20s',
-            $this->logger->formatter->format(sprintf('%s', $this->title), $style).str_repeat(' ', $padding),
+        $buf = sprintf(
+            '  %s % -20s',
+            $this->logger->formatter->format(sprintf('%s', $this->title), $style) . str_repeat(' ', $padding),
             $this->status
         );
-        fwrite($this->logger->fd, $buf."\r");
+        fwrite($this->logger->fd, $buf . "\r");
         fflush($this->logger->fd);
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 use CLIFramework\Ansi\Colors;
 use PHPUnit\Framework\TestCase;
 
@@ -6,19 +7,21 @@ class ColorsTest extends TestCase
 {
     public function stringProvider()
     {
-        $data = array();
-        foreach(Colors::getForegroundColors() as $fg) {
-            foreach(Colors::getBackgroundColors() as $bg) {
-                $data[] = array("Hello \n\t World", $fg, $bg);
+        $data = [];
+        foreach (Colors::getForegroundColors() as $fg) {
+            foreach (Colors::getBackgroundColors() as $bg) {
+                $data[] = ["Hello \n\t World", $fg, $bg];
             }
         }
+
         return $data;
     }
 
-    public function printColors() {
+    public function printColors()
+    {
         echo "\n";
-        foreach(Colors::getForegroundColors() as $fg) {
-            foreach(Colors::getBackgroundColors() as $bg) {
+        foreach (Colors::getForegroundColors() as $fg) {
+            foreach (Colors::getBackgroundColors() as $bg) {
                 echo Colors::decorate("Hello", $fg, $bg);
             }
             echo "\n";
@@ -40,9 +43,8 @@ class ColorsTest extends TestCase
      */
     public function testStripAnsiEscapeCode($input, $fg, $bg)
     {
-        $str = Colors::decorate($input, $fg, $bg);
+        $str    = Colors::decorate($input, $fg, $bg);
         $output = Colors::stripAnsiEscapeCode($str);
         $this->assertEquals($input, $output);
     }
 }
-

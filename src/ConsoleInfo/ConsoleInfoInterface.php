@@ -1,4 +1,5 @@
 <?php
+
 namespace CLIFramework\ConsoleInfo;
 
 interface ConsoleInfoInterface

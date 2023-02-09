@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the {{ }} package.
  *
@@ -8,9 +9,9 @@
  * file that was distributed with this source code.
  *
  */
+
 namespace tests\CLIFramework\IO;
 
-use CLIFramework\IO\StandardConsole;
 use CLIFramework\Testing\ConsoleTestCase;
 
 class StandardConsoleTest extends ConsoleTestCase
@@ -21,8 +22,8 @@ class StandardConsoleTest extends ConsoleTestCase
             $this->markTestSkipped("readline is required.");
         }
         $script = __DIR__ . '/../../script/CLIFramework/IO/StandardConsoleReadLine.php';
-        $self = $this;
-        $this->runScript($script, "test\n", function($line) use($self) {
+        $self   = $this;
+        $this->runScript($script, "test\n", function ($line) use ($self) {
             $self->assertSame('test', $line);
         });
     }
@@ -33,8 +34,8 @@ class StandardConsoleTest extends ConsoleTestCase
             $this->markTestSkipped("readline is required.");
         }
         $script = __DIR__ . '/../../script/CLIFramework/IO/StandardConsoleReadPassword.php';
-        $self = $this;
-        $this->runScript($script, "test\n", function($line) use($self) {
+        $self   = $this;
+        $this->runScript($script, "test\n", function ($line) use ($self) {
             $self->assertSame('test', $line);
         });
     }

@@ -9,16 +9,17 @@
  * file that was distributed with this source code.
  *
  */
-use PHPUnit\Framework\TestCase;
-use CLIFramework\IO\EchoWriter;
 
-class LoggerTest extends TestCase 
+use CLIFramework\Logger;
+use PHPUnit\Framework\TestCase;
+
+class LoggerTest extends TestCase
 {
     private $logger;
 
-    public function setUp() : void
+    public function setUp(): void
     {
-        $this->logger = new \CLIFramework\Logger;
+        $this->logger = new Logger();
     }
 
     function testRawOutput()
@@ -33,7 +34,7 @@ class LoggerTest extends TestCase
 
     function testLogException()
     {
-        $this->logger->logException(new \Exception('exception'));
+        $this->logger->logException(new Exception('exception'));
         $this->expectOutputString("exception\n");
     }
 }

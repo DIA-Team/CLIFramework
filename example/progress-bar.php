@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the CLIFramework package.
  *
@@ -8,6 +9,7 @@
  * file that was distributed with this source code.
  *
  */
+
 require 'vendor/autoload.php';
 
 $progress = new CLIFramework\Component\Progress\ProgressBar(STDERR);
